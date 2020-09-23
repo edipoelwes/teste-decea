@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ClientController extends Controller
+class ProductController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -15,9 +15,9 @@ class ClientController extends Controller
    */
   public function index()
   {
-    $clients = Client::where('company_id', 1)->get();
+    $products = Product::where('company_id', 1)->get();
 
-    return response()->json($clients);
+    return response()->json($products);
   }
 
   /**
@@ -28,9 +28,9 @@ class ClientController extends Controller
    */
   public function store(Request $request)
   {
-    $client = Client::create($request->all());
+    $product = Product::create($request->all());
 
-    return response()->json($client, 201);
+    return response()->json($product);
   }
 
   /**
@@ -41,12 +41,16 @@ class ClientController extends Controller
    */
   public function show($id)
   {
-    $client = Client::where([
+    $product = Product::where([
       ['company_id', 1],
-      ['id', $id]
+      ['id', $id],
     ])->first();
 
-    return response()->json($client);
+    if(!$product) {
+      return response()->json('produto não encontrado');
+    }
+
+    return response()->json($product);
   }
 
   /**
@@ -58,14 +62,15 @@ class ClientController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $client = Client::where([
+    $product = Product::where([
       ['company_id', 1],
-      ['id', $id]
+      ['id', $id],
     ])->first();
 
-    $client->update($request->all());
+    $product->update($request->all());
 
-    return response()->json($client);
+    return response()->json($product);
+
   }
 
   /**
@@ -76,12 +81,12 @@ class ClientController extends Controller
    */
   public function destroy($id)
   {
-    $client = Client::where([
+    $product = Product::where([
       ['company_id', 1],
-      ['id', $id]
+      ['id', $id],
     ])->first();
 
-    $client->delete();
+    $product->delete();
 
     return response()->json();
   }

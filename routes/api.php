@@ -25,4 +25,5 @@ Route::apiResources([
   '/users' => 'UserController',
   '/categories' => 'CategoryController',
   '/clients' => 'ClientController',
+  '/products' => 'ProductController',
 ]);
