@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\{User};
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class CategoryController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -15,9 +15,9 @@ class UserController extends Controller
    */
   public function index()
   {
-    $users = User::with('company')->where('company_id', 1)->get();
+    $category = Category::where('company_id', 1)->get();
 
-    return response()->json($users);
+    return response()->json($category);
   }
 
   /**
@@ -28,9 +28,9 @@ class UserController extends Controller
    */
   public function store(Request $request)
   {
-    $user = User::create($request->all());
+    $category = Category::create($request->all());
 
-    return response()->json($user, 201);
+    return response()->json($category, 201);
   }
 
   /**
@@ -41,12 +41,12 @@ class UserController extends Controller
    */
   public function show($id)
   {
-    $user = User::with('company')->where([
+    $category = Category::where([
       ['company_id', 1],
       ['id', $id]
     ])->first();
 
-    return response()->json($user);
+    return response()->json($category);
   }
 
   /**
@@ -58,14 +58,14 @@ class UserController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $user = User::where([
+    $category = Category::where([
       ['company_id', 1],
       ['id', $id]
     ])->first();
 
-    $user->update($request->all());
+    $category->update($request->all());
 
-    return response()->json();
+    return response()->json($category);
   }
 
   /**
@@ -76,13 +76,13 @@ class UserController extends Controller
    */
   public function destroy($id)
   {
-    $user = User::where([
+    $category = Category::where([
       ['company_id', 1],
       ['id', $id]
     ])->first();
 
-    $user->delete();
+    $category->delete();
 
-    return response()->json();
+    return response()->json($category);
   }
 }
