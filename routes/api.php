@@ -22,5 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResources([
   '/company' => 'CompanyController',
-  '/users' => 'UserController'
+  '/users' => 'UserController',
+  '/categories' => 'CategoryController',
+  '/clients' => 'ClientController',
 ]);

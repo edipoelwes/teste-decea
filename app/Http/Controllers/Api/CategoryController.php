@@ -15,9 +15,9 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    $category = Category::where('company_id', 1)->get();
+    $categories = Category::where('company_id', 1)->get();
 
-    return response()->json($category);
+    return response()->json($categories);
   }
 
   /**
@@ -83,6 +83,6 @@ class CategoryController extends Controller
 
     $category->delete();
 
-    return response()->json($category);
+    return response()->json();
   }
 }
