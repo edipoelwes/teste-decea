@@ -17,7 +17,6 @@ class CreateCategoriesTable extends Migration
       $table->id();
       $table->unsignedBigInteger('company_id');
       $table->string('name');
-      $table->timestamps();
       $table->softDeletes('deleted_at', 0);
 
       $table->foreign('company_id')->references('id')->on('companies');

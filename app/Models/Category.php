@@ -14,4 +14,6 @@ class Category extends Model
     'company_id',
     'name',
   ];
+
+  public $timestamps = false;
 }
