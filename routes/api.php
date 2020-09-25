@@ -18,16 +18,18 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
 Route::post('/auth/login', 'AuthController@login')->name('login');
-Route::post('/auth/logout', 'AuthController@logout')->name('logout');
-Route::post('/refresh', 'AuthController@refresh')->name('refresh');
-Route::post('/me', 'AuthController@me')->name('me');
 
-Route::apiResources([
-  '/company' => 'CompanyController',
-  '/users' => 'UserController',
-  '/categories' => 'CategoryController',
-  '/clients' => 'ClientController',
-  '/products' => 'ProductController',
-]);
+Route::middleware('apiJwt')->group(function(){
+  Route::post('/auth/logout', 'AuthController@logout')->name('logout');
+  Route::post('/refresh', 'AuthController@refresh')->name('refresh');
+  Route::post('/me', 'AuthController@me')->name('me');
+
+  Route::apiResources([
+    '/company' => 'CompanyController',
+    '/users' => 'UserController',
+    '/categories' => 'CategoryController',
+    '/clients' => 'ClientController',
+    '/products' => 'ProductController',
+  ]);
+});
