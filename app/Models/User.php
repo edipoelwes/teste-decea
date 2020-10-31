@@ -22,6 +22,8 @@ class User extends Authenticatable implements JWTSubject
     'name',
     'email',
     'password',
+    'document',
+    'phone',
   ];
 
   /**
@@ -43,6 +45,27 @@ class User extends Authenticatable implements JWTSubject
     'email_verified_at' => 'datetime',
   ];
 
+  /**
+   * Get the identifier that will be stored in the subject claim of the JWT.
+   *
+   * @return mixed
+   */
+  public function getJWTIdentifier()
+  {
+    return $this->getKey();
+  }
+
+  /**
+   * Return a key value array, containing any custom claims to be added to the JWT.
+   *
+   * @return array
+   */
+  public function getJWTCustomClaims()
+  {
+    return [];
+  }
+
+
   public function company()
   {
     return $this->belongsTo('App\Models\Company');
@@ -51,30 +74,53 @@ class User extends Authenticatable implements JWTSubject
   public function setPasswordAttribute($value)
   {
     if (empty($value)) {
-        unset($this->attributes['password']);
-        return;
+      unset($this->attributes['password']);
+      return;
     }
 
     $this->attributes['password'] = bcrypt($value);
   }
 
-  /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
+  public function setDocumentAttribute($value)
+  {
+    $this->attributes['document'] = $this->clearField($value);
+  }
+
+  public function getDocumentAttribute($value)
+  {
+    return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
+  }
+
+  public function setPhoneAttribute($value)
+  {
+    $this->attributes['phone'] = $this->clearField($value);
+  }
+
+  private function convertStringToDouble(?string $param)
+  {
+    if (empty($param)) {
+      return null;
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
+    return str_replace(',', '.', str_replace('.', '', $param));
+  }
+
+  private function convertStringToDate(?string $param)
+  {
+    if (empty($param)) {
+      return null;
     }
+
+    list($day, $month, $year) = explode('/', $param);
+    return (new \DateTime($year . '-' . $month . '-' . $day))->format('Y-m-d');
+  }
+
+  private function clearField(?string $param)
+  {
+    if (empty($param)) {
+      return '';
+    }
+
+    return str_replace(['.', '-', '/', '(', ')', ' '], '', $param);
+  }
 }

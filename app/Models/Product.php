@@ -18,4 +18,27 @@ class Product extends Model
     'amount',
     'min_amount',
  ];
+
+  public function setPriceAttribute($value)
+  {
+    if (empty($value)) {
+      $this->attributes['price'] = null;
+    } else {
+      $this->attributes['price'] = floatval($this->convertStringToDouble($value));
+    }
+  }
+
+  public function getPriceAttribute($value)
+  {
+    return $value;
+  }
+
+  private function convertStringToDouble(?string $param)
+  {
+    if (empty($param)) {
+      return null;
+    }
+
+    return str_replace(',', '.', str_replace('.', '', $param));
+  }
 }

@@ -25,4 +25,33 @@ class Client extends Model
     'state',
     'city',
  ];
+
+ public function setDocumentAttribute($value)
+  {
+    $this->attributes['document'] = $this->clearField($value);
+  }
+
+  public function setPhoneAttribute($value)
+  {
+    $this->attributes['phone'] = $this->clearField($value);
+  }
+
+  public function setPhoneSecondaryAttribute($value)
+  {
+    $this->attributes['phone_secondary'] = $this->clearField($value);
+  }
+
+  public function setZipcodeAttribute($value)
+  {
+    $this->attributes['zipcode'] = $this->clearField($value);
+  }
+
+  private function clearField(?string $param)
+  {
+    if (empty($param)) {
+      return '';
+    }
+
+    return str_replace(['.', '-', '/', '(', ')', ' '], '', $param);
+  }
 }

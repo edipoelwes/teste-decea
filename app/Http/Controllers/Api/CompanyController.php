@@ -28,6 +28,9 @@ class CompanyController extends Controller
    */
   public function store(Request $request)
   {
+    // $company = new Company();
+    // $company->fill($request->all());
+    // var_dump($company->getAttributes());
     $company = Company::create($request->all());
 
     return response()->json($company, 201);
