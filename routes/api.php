@@ -28,10 +28,10 @@ Route::middleware('apiJwt')->group(function(){
   Route::post('/refresh', 'AuthController@refresh')->name('refresh');
   Route::post('/me', 'AuthController@me')->name('me');
 
-  Route::apiResource('/users', 'UserController')->except('store');
+  Route::post('users/{company}', 'UserController@index')->name('users.index');
+  Route::apiResource('/users', 'UserController')->except(['store', 'index']);
   Route::apiResources([
     '/company' => 'CompanyController',
-    '/categories' => 'CategoryController',
     '/clients' => 'ClientController',
   ]);
 

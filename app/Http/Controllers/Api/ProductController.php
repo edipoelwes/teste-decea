@@ -17,7 +17,7 @@ class ProductController extends Controller
   {
     $products = Product::where([
       ['company_id', $company],
-      ['category_id', $category]
+      ['category', $category]
       ])->get();
 
     return response()->json($products);

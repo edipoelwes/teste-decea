@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
     Schema::create('products', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('company_id');
-      $table->unsignedBigInteger('category_id');
+      $table->string('category');
       $table->string('name');
       $table->decimal('price', 10, 2)->default(0);
       $table->integer('amount')->default(0);
@@ -25,7 +25,6 @@ class CreateProductsTable extends Migration
       $table->softDeletes('deleted_at', 0);
 
       $table->foreign('company_id')->references('id')->on('companies');
-      $table->foreign('category_id')->references('id')->on('categories');
     });
   }
 
