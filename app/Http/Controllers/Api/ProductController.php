@@ -13,9 +13,12 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index($company, $category)
   {
-    $products = Product::where('company_id', 1)->get();
+    $products = Product::where([
+      ['company_id', $company],
+      ['category_id', $category]
+      ])->get();
 
     return response()->json($products);
   }
@@ -41,10 +44,7 @@ class ProductController extends Controller
    */
   public function show($id)
   {
-    $product = Product::where([
-      ['company_id', 1],
-      ['id', $id],
-    ])->first();
+    $product = Product::where('id', $id)->first();
 
     if(!$product) {
       return response()->json('produto não encontrado');
@@ -62,10 +62,7 @@ class ProductController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $product = Product::where([
-      ['company_id', 1],
-      ['id', $id],
-    ])->first();
+    $product = Product::where('id', $id)->first();
 
     $product->update($request->all());
 
@@ -81,10 +78,7 @@ class ProductController extends Controller
    */
   public function destroy($id)
   {
-    $product = Product::where([
-      ['company_id', 1],
-      ['id', $id],
-    ])->first();
+    $product = Product::where('id', $id)->first();
 
     $product->delete();
 

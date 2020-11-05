@@ -13,9 +13,9 @@ class UserController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index($company)
   {
-    $users = User::with('company')->where('company_id', 1)->get();
+    $users = User::with('company')->where('company_id', $company)->get();
 
     return response()->json($users);
   }
@@ -41,10 +41,7 @@ class UserController extends Controller
    */
   public function show($id)
   {
-    $user = User::with('company')->where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $user = User::with('company')->where('id', $id)->first();
 
     return response()->json($user);
   }
@@ -58,10 +55,7 @@ class UserController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $user = User::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $user = User::where('id', $id)->first();
 
     $user->update($request->all());
 
@@ -76,10 +70,7 @@ class UserController extends Controller
    */
   public function destroy($id)
   {
-    $user = User::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $user = User::where('id', $id)->first();
 
     $user->delete();
 

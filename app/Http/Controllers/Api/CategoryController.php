@@ -41,10 +41,7 @@ class CategoryController extends Controller
    */
   public function show($id)
   {
-    $category = Category::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $category = Category::where('id', $id)->first();
 
     return response()->json($category);
   }
@@ -58,10 +55,7 @@ class CategoryController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $category = Category::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $category = Category::where('id', $id)->first();
 
     $category->update($request->all());
 
@@ -76,10 +70,7 @@ class CategoryController extends Controller
    */
   public function destroy($id)
   {
-    $category = Category::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $category = Category::where('id', $id)->first();
 
     $category->delete();
 

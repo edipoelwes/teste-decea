@@ -12,13 +12,8 @@ class RegisterController extends Controller
   public function register(Request $request)
   {
     DB::beginTransaction();
-    $user = $request->only(['name', 'email', 'password']);
-    $company = $request->only([
-    'social_name',
-    'alias_name',
-    'document_company',
-    'document_company_secondary',]);
-
+    $user = $request->only(['name', 'email', 'password', 'document', 'phone']);
+    $company = $request->except(['name', 'email', 'password', 'document', 'phone']);
     $newCompany = Company::create($company);
     $user['company_id'] = $newCompany->id;
     $newUser = User::create($user);

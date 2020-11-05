@@ -29,11 +29,12 @@ Route::middleware('apiJwt')->group(function(){
   Route::post('/me', 'AuthController@me')->name('me');
 
   Route::apiResource('/users', 'UserController')->except('store');
-
   Route::apiResources([
     '/company' => 'CompanyController',
     '/categories' => 'CategoryController',
     '/clients' => 'ClientController',
-    '/products' => 'ProductController',
   ]);
+
+  Route::get('/products/{company}/{category}', 'ProductController@index')->name('products.index');
+  Route::apiResource('/products', 'ProductController')->except('index');
 });
