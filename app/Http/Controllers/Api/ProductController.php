@@ -13,12 +13,12 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index($company, $category)
+  public function index($company, $category, $limit = 10)
   {
     $products = Product::where([
       ['company_id', $company],
       ['category', $category]
-      ])->get();
+      ])->paginate($limit);
 
     return response()->json($products);
   }

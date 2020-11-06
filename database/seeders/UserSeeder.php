@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         'document'       => '03570590348',
         'phone'          => '86999097714',
         'email'          => 'edipoelwes2@gmail.com',
-        'password'       => bcrypt('12345678'),
+        'password'       => bcrypt('123456'),
         'remember_token' => Str::random(10),
         'created_at'     => now(),
         'updated_at'     => now(),
