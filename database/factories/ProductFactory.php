@@ -21,9 +21,10 @@ class ProductFactory extends Factory
    */
   public function definition()
   {
+    $categorias = ['fraldas', 'lencos_umedecidos', 'calcados', 'roupinha'];
     return [
       'company_id' => 1,
-      'category' => 'fraldas',
+      'category' => $this->faker->randomElement($categorias),
       'name' => $this->faker->sentence($nbWords = 4, $variableNbWords = true),
       'price' => $this->faker->randomFloat(1, 2, 10),
       'amount' => 0,

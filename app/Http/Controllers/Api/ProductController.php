@@ -13,8 +13,9 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index($company, $category, $limit = 10)
+  public function index(Request $request, $company, $category)
   {
+    $limit = $request->limit;
     $products = Product::where([
       ['company_id', $company],
       ['category', $category]
