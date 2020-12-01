@@ -25,9 +25,9 @@ class apiProtectRoute extends BaseMiddleware
       $user = JWTAuth::parseToken()->authenticate();
     } catch (Exception $e){
       if ($e instanceof TokenInvalidException){
-        return response()->json(['status' => 'Token is Invalid']);
+        return response()->json(['statusText' => 'Token is Invalid'], 404);
       } else if ($e instanceof TokenExpiredException){
-        return response()->json(['status' => 'Token is Expired']);
+        return response()->json(['statusText' => 'Token is Expired'], 401);
       } else {
         return response()->json(['status' => 'Authorization Token not found']);
       }

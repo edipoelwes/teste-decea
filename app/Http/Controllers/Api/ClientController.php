@@ -13,9 +13,10 @@ class ClientController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request, $company)
   {
-    $clients = Client::where('company_id', 1)->get();
+    $limit = $request->limit;
+    $clients = Client::where('company_id', $company)->orderBy('id', 'desc')->paginate($limit);
 
     return response()->json($clients);
   }
@@ -41,10 +42,11 @@ class ClientController extends Controller
    */
   public function show($id)
   {
-    $client = Client::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $client = Client::where('id', $id)->first();
+
+    if(!$client) {
+      return response()->json('cliente não encontrado');
+    }
 
     return response()->json($client);
   }
@@ -58,10 +60,7 @@ class ClientController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $client = Client::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $client = Client::where('id', $id)->first();
 
     $client->update($request->all());
 
@@ -76,13 +75,10 @@ class ClientController extends Controller
    */
   public function destroy($id)
   {
-    $client = Client::where([
-      ['company_id', 1],
-      ['id', $id]
-    ])->first();
+    $client = Client::where('id', $id)->first();
 
     $client->delete();
 
-    return response()->json();
+    return response()->json($client);
   }
 }

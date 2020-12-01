@@ -28,13 +28,18 @@ Route::middleware('apiJwt')->group(function(){
   Route::post('/refresh', 'AuthController@refresh')->name('refresh');
   Route::post('/me', 'AuthController@me')->name('me');
 
-  Route::post('users/{company}', 'UserController@index')->name('users.index');
-  Route::apiResource('/users', 'UserController')->except(['store', 'index']);
-  Route::apiResources([
-    '/company' => 'CompanyController',
-    '/clients' => 'ClientController',
-  ]);
+  Route::get('users/{company}', 'UserController@index')->name('users.index');
+  Route::get('user/{user}', 'UserController@show')->name('users.show');
+  Route::apiResource('/users', 'UserController')->except(['store', 'index', 'show']);
+
+  Route::apiResource('/company', 'CompanyController');
 
   Route::get('/products/{company}/{category}', 'ProductController@index')->name('products.index');
   Route::apiResource('/products', 'ProductController')->except('index');
+
+  Route::get('/clients/{company}', 'ClientController@index')->name('clients.index');
+  Route::get('/client/{client}', 'ClientController@show')->name('clients.show');
+  Route::apiResource('/clients', 'ClientController')->except(['index', 'show']);
+
+
 });
