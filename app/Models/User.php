@@ -88,6 +88,10 @@ class User extends Authenticatable implements JWTSubject
 
   public function getDocumentAttribute($value)
   {
+    if (!$value){
+      return null;
+    }
+
     return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
   }
 
@@ -98,6 +102,10 @@ class User extends Authenticatable implements JWTSubject
 
   public function getPhoneAttribute($value)
   {
+    if (!$value){
+      return null;
+    }
+
     return '(' . substr($value, 0, 2) . ') ' . substr($value, 2, 5) . ' - ' . substr($value, 7, 9);
   }
 
