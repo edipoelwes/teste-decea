@@ -96,6 +96,11 @@ class User extends Authenticatable implements JWTSubject
     $this->attributes['phone'] = $this->clearField($value);
   }
 
+  public function getPhoneAttribute($value)
+  {
+    return '(' . substr($value, 0, 2) . ') ' . substr($value, 2, 5) . ' - ' . substr($value, 7, 9);
+  }
+
   private function convertStringToDouble(?string $param)
   {
     if (empty($param)) {

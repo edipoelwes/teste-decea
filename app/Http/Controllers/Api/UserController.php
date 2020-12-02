@@ -59,7 +59,7 @@ class UserController extends Controller
 
     $user->update($request->all());
 
-    return response()->json();
+    return response()->json($user);
   }
 
   /**
