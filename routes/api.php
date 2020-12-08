@@ -34,6 +34,7 @@ Route::middleware('apiJwt')->group(function(){
 
   Route::apiResource('/company', 'CompanyController');
 
+  Route::get('/products/purchases/{company}', 'ProductController@purshases')->name('products.list_products');
   Route::get('/products/{company}/{category}', 'ProductController@index')->name('products.index');
   Route::apiResource('/products', 'ProductController')->except('index');
 

@@ -85,4 +85,11 @@ class ProductController extends Controller
 
     return response()->json();
   }
+
+  public function purshases($company)
+  {
+    $products = Product::where('company_id', $company)->get();
+
+    return response()->json($products);
+  }
 }
