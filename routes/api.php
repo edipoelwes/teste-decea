@@ -42,5 +42,7 @@ Route::middleware('apiJwt')->group(function(){
   Route::get('/client/{client}', 'ClientController@show')->name('clients.show');
   Route::apiResource('/clients', 'ClientController')->except(['index', 'show']);
 
+  Route::apiResource('/purchases', 'PurchaseController');
+
 
 });

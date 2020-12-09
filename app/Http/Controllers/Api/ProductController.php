@@ -88,7 +88,7 @@ class ProductController extends Controller
 
   public function purshases($company)
   {
-    $products = Product::where('company_id', $company)->get();
+    $products = Product::where('company_id', $company)->orderBy('category')->get();
 
     return response()->json($products);
   }
