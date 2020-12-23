@@ -18,6 +18,7 @@ class Purchase extends Model
     'total',
     'obs',
     'provider',
+    'due_date'
   ];
 
   public function user()
@@ -28,5 +29,38 @@ class Purchase extends Model
   public function purchase_products ()
   {
     return $this->hasMany('App\Models\PurchaseProduct');
+  }
+
+  public function setDueDateAttribute($value)
+  {
+    if (empty($value)) {
+      $this->attributes['due_date'] = null;
+    }  else {
+      $time = strtotime($value);
+      $this->attributes['due_date'] = date('Y-m-d', $time);
+    }
+  }
+
+  public function setTotalAttribute($value)
+  {
+    if (empty($value)) {
+      $this->attributes['total'] = null;
+    } else {
+      $this->attributes['total'] = floatval($this->convertStringToDouble($value));
+    }
+  }
+
+  public function getTotalAttribute($value)
+  {
+    return $value;
+  }
+
+  private function convertStringToDouble(?string $param)
+  {
+    if (empty($param)) {
+      return null;
+    }
+
+    return str_replace(',', '.', str_replace('.', '', $param));
   }
 }

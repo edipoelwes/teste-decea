@@ -18,8 +18,8 @@ class CreatePurchasesTable extends Migration
       $table->unsignedBigInteger('company_id');
       $table->unsignedBigInteger('user_id');
 
-      $table->integer('status')->nullable();
-      $table->integer('payment_method')->nullable();
+      $table->string('status')->nullable();
+      $table->string('payment_method')->nullable();
       $table->text('obs')->nullable();
       $table->string('provider')->nullable();
       $table->date('due_date')->nullable();
