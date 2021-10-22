@@ -26,7 +26,7 @@ Route::post('users', 'UserController@store')->name('users.store');
 Route::middleware('apiJwt')->group(function(){
   Route::post('/auth/logout', 'AuthController@logout')->name('logout');
   Route::post('/refresh', 'AuthController@refresh')->name('refresh');
-  Route::post('/me', 'AuthController@me')->name('me');
+  Route::get('/me', 'AuthController@me')->name('me');
 
   Route::get('users/{company}', 'UserController@index')->name('users.index');
   Route::get('user/{user}', 'UserController@show')->name('users.show');
