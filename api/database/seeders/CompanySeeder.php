@@ -16,8 +16,8 @@ class CompanySeeder extends Seeder
   {
     DB::table('companies')->insert([
       [
-        'social_name' => 'Sonhos de Ninar LTDA',
-        'alias_name' => 'Sonhos de Ninar',
+        'social_name' => 'Decea LTDA',
+        'alias_name' => 'Decea',
         'document_company' => '63565720000114',
         'document_company_secondary' => '5026485-1',
         /** address */
