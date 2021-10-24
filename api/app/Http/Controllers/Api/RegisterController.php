@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @OA\Post(
- * tags={"register"},
+ * tags={"Auth"},
  * path="/api/auth/register",
  * summary="Sign up",
  * description="Register",

@@ -15,7 +15,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * tags={"login"},
+     * tags={"Auth"},
      * path="/api/auth/login",
      * summary="Sign in",
      * description="Login by email, password",
@@ -56,15 +56,20 @@ class AuthController extends Controller
 
     /**
      * @OA\Get(
-     *     tags={"me"},
-     *     summary="Returns a list of courses",
-     *     description="Returns a object of courses",
-     *     path="/api/me",
-     *     @OA\Response(response="200", description="A list with courses"),
-     * ),
-     *
+     * tags={"Auth"},
+     * path="/api/me",
+     * summary="Me",
+     * description="Retorna o usuario logado",
+     * security={{"bearer":{}}},
+     * @OA\Response(
+     *    response=200,
+     *    description="",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="")
+     *        )
+     *     )
+     * )
      */
-
     public function me()
     {
         return response()->json(auth('api')->user());

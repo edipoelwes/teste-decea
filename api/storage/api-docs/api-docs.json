@@ -1,18 +1,14 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Example API",
-        "contact": {
-            "name": "Support Team",
-            "email": "support@example.com"
-        },
+        "title": "API DECEA",
         "version": "1.0"
     },
     "paths": {
         "/api/auth/login": {
             "post": {
                 "tags": [
-                    "login"
+                    "Auth"
                 ],
                 "summary": "Sign in",
                 "description": "Login by email, password",
@@ -67,22 +63,340 @@
         "/api/me": {
             "get": {
                 "tags": [
-                    "me"
+                    "Auth"
                 ],
-                "summary": "Returns a list of courses",
-                "description": "Returns a object of courses",
+                "summary": "Me",
+                "description": "Retorna o usuario logado",
                 "operationId": "8367feff40ba10e43187792cad3132c1",
                 "responses": {
                     "200": {
-                        "description": "A list with courses"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/{company}": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "lista de clientes",
+                "description": "Retorna uma lista de clientes",
+                "operationId": "e861d29228c18df8b1e0452f27466130",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "ID of company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "company_id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Ciara Bogisich"
+                                        },
+                                        "document": {
+                                            "type": "string",
+                                            "example": "684.340.455-47"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "(86) 99222 - 6108"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/clients": {
+            "post": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Inserir um cliente",
+                "description": "Insert um cliente em uma company",
+                "operationId": "f909473745c1a1d469e0c5a5b54682b8",
+                "requestBody": {
+                    "description": "client credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "company_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "company_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Edipo Elwes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente cadastrado com sucesso!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/client/{company}": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "cliente",
+                "description": "Retorna um cliente",
+                "operationId": "09ede45e47dcfa2adbae2fb680bfd679",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "ID of company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "company_id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Ciara Bogisich"
+                                        },
+                                        "document": {
+                                            "type": "string",
+                                            "example": "684.340.455-47"
+                                        },
+                                        "phone": {
+                                            "type": "string",
+                                            "example": "(86) 99222 - 6108"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/clients/{client}": {
+            "put": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Edita um cliente",
+                "description": "Edita um cliente",
+                "operationId": "15591365886417bc26fb290a81016499",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "Project id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "client credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "company_id",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "company_id": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "1"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "text",
+                                        "example": "Edipo Elwes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente editado com sucesso!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "remove um cliente",
+                "description": "Remove um cliente de uma company",
+                "operationId": "833eb8e223eda0f71bee956a8153f8aa",
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "path",
+                        "description": "ID Cliente",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cliente removido com sucesso!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         },
         "/api/auth/register": {
             "post": {
                 "tags": [
-                    "register"
+                    "Auth"
                 ],
                 "summary": "Sign up",
                 "description": "Register",
@@ -183,6 +497,79 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/users/{company}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Users",
+                "description": "Retorna uma lista de usuarios",
+                "operationId": "e1f11320cd661e4d9523004c0665e104",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "ID of company",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "2"
+                                        },
+                                        "company_id": {
+                                            "type": "string",
+                                            "example": "2"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "user1"
+                                        },
+                                        "document": {
+                                            "type": "string",
+                                            "example": "035.859.652-36"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "exemplo2@gmail.com"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
