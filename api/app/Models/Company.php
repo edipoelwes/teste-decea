@@ -39,6 +39,11 @@ class Company extends Model
     $this->attributes['document_company_secondary'] = $this->clearField($value);
   }
 
+  public function getDocumentCompanySecondaryAttribute($value)
+  {
+    return substr($value, 0, 7) . '-' . substr($value, 7, 8);
+  }
+
   public function setZipcodeAttribute($value)
   {
     $this->attributes['zipcode'] = $this->clearField($value);

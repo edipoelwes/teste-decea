@@ -18,26 +18,15 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'company_id'     => 1,
-                'name'           => 'Exemplo',
+                'name'           => 'Teste',
                 'document'       => '44476379010',
                 'phone'          => '86999097714',
-                'email'          => 'exemplo@gmail.com',
+                'email'          => 'teste@gmail.com',
                 'password'       => bcrypt('123456'),
                 'remember_token' => Str::random(10),
                 'created_at'     => now(),
                 'updated_at'     => now(),
             ],
-            // [
-            //     'company_id'     => 1,
-            //     'name'           => 'Jessianne Saiara',
-            //     'document'       => '03570590355',
-            //     'phone'          => '86999097714',
-            //     'email'          => 'saiaraj2006@gmail.com',
-            //     'password'       => bcrypt('123456'),
-            //     'remember_token' => Str::random(10),
-            //     'created_at'     => now(),
-            //     'updated_at'     => now(),
-            // ],
         ]);
     }
 }

@@ -13,3 +13,6 @@ yarn-error.log
 .idea
 .docker/php
 .docker/mysql
+/public/css/app.css
+/public/js/app.js
+.env.testing
